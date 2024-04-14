@@ -1,0 +1,19 @@
+version: '3.4'
+
+networks:
+  fhir:
+services:
+  lc_backend:
+    image: ${DOCKER_REGISTRY-}lcbackend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - fhir
+    ports:
+      - "81:80"
+  fhirbase:
+    hostname: fhirbase
+    image: fhirbase/fhirbase
+    networks:
+      - fhir
