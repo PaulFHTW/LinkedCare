@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
 
 namespace LC_Backend
@@ -31,11 +32,12 @@ namespace LC_Backend
             public string Role { get; set; }
             public string AssociatedId { get; set; }
         }
-
-        [HttpPost("/login")]
+        [Route ("login")]
+        [HttpPost]
         public UserData Login(LoginData login)
         {
-            using var conn = new NpgsqlConnection("Server=fhirbase;Port=5432;User Id=postgres;Password=;Database=users;");
+            System.Console.WriteLine("IM AM IN LOGIN");
+            using var conn = new NpgsqlConnection("Server=localhost;Port=5432;User Id=postgres;Password=postgres;Database=users;");
             conn.Open();
             using var cmd = new NpgsqlCommand("SELECT username, firstname, lastname, role, patientid FROM users WHERE username=@username AND password=@password;", conn);
             cmd.Parameters.AddWithValue("username", login.Username);
@@ -51,6 +53,7 @@ namespace LC_Backend
                 AssociatedId = reader.IsDBNull(4) ? null : reader.GetString(4),
             };
             HttpContext.Session.SetString("user", user.Username);
+            System.Console.WriteLine(user.Username);
             return user;
         }
     }
