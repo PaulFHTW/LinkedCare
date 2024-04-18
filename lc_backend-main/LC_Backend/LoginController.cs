@@ -36,7 +36,6 @@ namespace LC_Backend
         [HttpPost]
         public UserData Login(LoginData login)
         {
-            System.Console.WriteLine("IM AM IN LOGIN");
             using var conn = new NpgsqlConnection("Server=localhost;Port=5432;User Id=postgres;Password=postgres;Database=users;");
             conn.Open();
             using var cmd = new NpgsqlCommand("SELECT username, firstname, lastname, role, patientid FROM users WHERE username=@username AND password=@password;", conn);
@@ -53,7 +52,6 @@ namespace LC_Backend
                 AssociatedId = reader.IsDBNull(4) ? null : reader.GetString(4),
             };
             HttpContext.Session.SetString("user", user.Username);
-            System.Console.WriteLine(user.Username);
             return user;
         }
     }
