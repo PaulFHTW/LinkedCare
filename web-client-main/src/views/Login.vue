@@ -55,8 +55,17 @@ export default {
     },
     loginUser(){
       // TODO check loginData with DB
-      alert(this.loginData.email + " " + this.loginData.password)
-      window.location="/";
+      const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username : this.loginData.email, password : this.loginData.password})
+      };
+      fetch('http://localhost:5005/login', requestOptions)
+          .then(response => response.json())
+
+ 
+     //alert(this.loginData.email + " " + this.loginData.password)
+      //window.location="/";
     }
   }
 };
