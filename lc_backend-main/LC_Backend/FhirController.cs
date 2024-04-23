@@ -59,7 +59,7 @@ namespace LC_Backend
                 list = list.Skip((page - 1) * pagesize).Take(pagesize);
             foreach (var r in list)
             {
-                bundle.AddResourceEntry(r, "https://127.0.0.1/fhir/" + r.ResourceType.ToString() + "/" + r.Id);
+                bundle.AddResourceEntry(r, "https://172.29.16.61/fhir/" + r.ResourceType.ToString() + "/" + r.Id);
             }
             return serializer.SerializeToString(bundle, Hl7.Fhir.Rest.SummaryType.False);
         }
