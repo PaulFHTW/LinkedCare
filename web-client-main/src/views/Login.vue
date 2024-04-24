@@ -60,7 +60,7 @@ export default {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username : this.loginData.email, password : this.loginData.password})
       };
-      fetch('http://172.29.16.61/login', requestOptions)
+      fetch('http://172.29.16.61:81/login', requestOptions)
           .then(response => response.json())
 
  
