@@ -36,7 +36,7 @@ namespace LC_Backend
         [HttpPost]
         public UserData Login(LoginData login)
         {
-            using var conn = new NpgsqlConnection("Server=localhost;Port=5432;User Id=postgres;Password=postgres;Database=users;");
+            using var conn = new NpgsqlConnection("Server=172.17.0.3;Port=5432;User Id=postgres;Database=users;");
             conn.Open();
             using var cmd = new NpgsqlCommand("SELECT username, firstname, lastname, role, patientid FROM users WHERE username=@username AND password=@password;", conn);
             cmd.Parameters.AddWithValue("username", login.Username);
