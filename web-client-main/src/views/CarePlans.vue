@@ -15,7 +15,7 @@ export default ({
   <div class="carePlans">
     <h1>This is a care plans page</h1>
     <Table 
-        fetchLink = "http://linkedcare.ddns.net/fhir/careplan"
+        fetchLink = "http://172.29.16.61/carePlans"
         tableClasses = "text-start table-striped"
         v-bind:tableColumns = "
             [

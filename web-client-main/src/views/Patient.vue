@@ -30,7 +30,7 @@ export default ({
                 headline:   '📝 Laufende Rezepten',
                 component:  'AccordionItemTable',
                 tableData: {
-                    fetchLink: 'http://linkedcare.ddns.net/fhir/Patient',
+                    fetchLink: 'http://172.29.16.61/patients',
                     tableClasses: 'text-start table-striped',
                     tableColumns:
                         [
