@@ -1,0 +1,44 @@
+server:
+  port: 8081
+
+keycloak:
+  clientID: "resource-api"
+  clientSecret: "35b37e9f-186a-4239-a5e5-2f1ce82b7f9a"
+  #ip: "healthaccesscontrol.eastus2.cloudapp.azure.com"
+  ip: "172.29.16.61:8080"
+  debugMode: false
+  #ip: "http://52.184.137.140:8080/auth/realms/Patients/protocol/openid-connect/token/introspect"
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: "http://172.29.16.61:8080/realms/data-facade-app"
+      client:
+        provider:
+          keycloak:
+            issuer-uri: "http://172.29.16.61:8080/realms/data-facade-app"
+        registration:
+          keycloak:
+            client-id: "data-facade-app"
+            authorization-grant-type: "authorization_code"
+            scope: "openid"
+  jackson:
+    mapper:
+      accept-case-insensitive-properties: true
+
+fhir:
+  #server-url: "http://pt-n4.fhir.w3.cs.technikum-wien.at/fhir"
+  serverUrl: "https://hapi.fhir.org/baseR4"
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          client:
+            RestTemplate: trace
+    #root: info
+    ca:
+      uhn:
+        fhir: error

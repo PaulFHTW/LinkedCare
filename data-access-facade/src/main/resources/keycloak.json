@@ -1,0 +1,8 @@
+{
+  "realm": "Patients",
+  "auth-server-url" : "http://healthaccesscontrol.eastus2.cloudapp.azure.com:8080/auth",
+  "resource" : "resource-api",
+  "credentials": {
+    "secret": "35b37e9f-186a-4239-a5e5-2f1ce82b7f9a"
+  }
+}
