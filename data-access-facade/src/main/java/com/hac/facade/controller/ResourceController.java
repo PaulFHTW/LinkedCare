@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.keycloak.util.JsonSerialization;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.boot.jackson.JsonObjectSerializer;
 import org.springframework.http.HttpStatus;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
@@ -20,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializer;
 import com.hac.facade.aspects.IntrospectedAndAddUsername;
 import com.hac.facade.aspects.IntrospectedToken;
 import com.hac.facade.dto.AppointmentDTO;
@@ -31,6 +37,7 @@ import com.hac.facade.service.KeycloakService;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import nonapi.io.github.classgraph.json.JSONSerializer;
 
 class careplan{
     public String id;
@@ -56,14 +63,13 @@ public class ResourceController {
         if (token == null || !token.contains("Bearer")) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
-        //Gson gson = new Gson();
+        
         List<String> carePlanData = null;
         try {
             carePlanData = GetFHIRData();
         } catch (SQLException ex) {
             return new ResponseEntity<>(NOT_FOUND);
         }
-        //var JSONcarePlanData = gson.toJson(carePlanData);
 
         String splitToken = token.split("Bearer")[1].trim();
         if ("Admin".equals(splitToken)) {

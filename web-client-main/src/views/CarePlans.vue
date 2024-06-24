@@ -1,39 +1,47 @@
 <script>
-import Table from '../components/table/TableElement.vue'
+//import Table from '../components/table/TableElement.vue'
 
 export default ({
   name: "Care Plans",
-  components: {
-    Table
-    },
+  //components: {
+  //  Table
+  //  },
   setup(){},
   data(){
     return{
-      carePlanData: String
-    } 
+      carePlanData: {
+        
+      }
+    };
   },
   methods: {
-    getData(){
-      const requestOptions = {
-      method: 'GET',
-      headers: { "Authorization":"Bearer Admin" },
-      };
-      fetch('http://localhost:8081/PoC', requestOptions)
-          .then(response => {
-            this.carePlanData = JSON.stringify(response.data, null, "\t");
-            console.log(response.data);
-            return response;
-          });
-    }
-  }
-})
+    getData: function(){
+      const myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer Admin");
+        myHeaders.append("Cookie", "JSESSIONID=C2A4366647A9DBCA91AF2A1236658F25");
 
+        const requestOptions = {
+          method: "GET",
+          headers: myHeaders,
+          redirect: "follow"
+        };
+
+        fetch("http://172.29.16.62:8080/PoC", requestOptions)
+          .then(response => response.json())
+          .then(data => this.carePlanData = data);
+      },
+    },
+    mounted(){
+      this.getData()
+    }
+});
 </script>
 
 <template>
+  <pre>{{ carePlanData }}</pre>
   <div class="carePlans">
-      <Table 
-        fetchLink = "http://172.29.16.61/carePlans"
+      <!--<Table 
+        fetchLink = "http://localhost:8081/PoC"
         tableClasses = "text-start table-striped"
         v-bind:tableColumns = "
             [
@@ -72,21 +80,14 @@ export default ({
                     titlePath: 'resource.subject.id',
                     titleSuffix: '',
 
-                    hrefPrefix: 'http://localhost:8080/patient/',
+                    hrefPrefix: 'http://localhost:8080/carePlans/',
                     hrefPath: 'resource.subject.id',
                     hrefSuffix: '',
 
                     textPrefix: '🗂️',
                 },
             ]"
-    />
+    />-->
   </div>
-  <div class="hello">
-      <textarea v-model="carePlanData" rows="20" cols="80"></textarea>
-      <ul id="items">
-        <li v-for="(item, index) in listData" :key="index">
-          {{ `${item.text} [${item.id}]` }}
-        </li>
-      </ul>
-    </div>
+
 </template>
