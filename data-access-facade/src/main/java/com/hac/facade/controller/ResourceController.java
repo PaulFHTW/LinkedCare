@@ -1,10 +1,11 @@
 package com.hac.facade.controller;
 
-import static org.springframework.http.HttpStatus.*;
-
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
+import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,20 +37,20 @@ public class ResourceController {
     private final FHIRDataProvider fhirDataProvider;
     private final FHIRDataStore fhirDataStore;
 
-    @GetMapping("/PoC")
+    @GetMapping(value = "/PoC", produces = "application/json")
     public ResponseEntity<String> GetData(@RequestHeader(name = "Authorization") String token){
-        /*if (token == null || !token.contains("Bearer")) {
+        if (token == null || !token.contains("Bearer")) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
+        
         String splitToken = token.split("Bearer")[1].trim();
         if ("Admin".equals(splitToken)) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        } */
-        return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
-
+    
     @PostMapping(value = "/tokenInfo", produces = "application/json")
     public TokenIntrospectionResponse getTokenInfo(@RequestHeader(name = "Authorization") String token) {
         return keycloakService.introspectToken(token);

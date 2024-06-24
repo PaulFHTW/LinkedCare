@@ -1,5 +1,5 @@
 package com.hac.facade.configuration;
-
+/* 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +12,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+*/
 
-
-@Component
+//@Component
+/*
 public class KeycloakLogoutHandler implements LogoutHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(KeycloakLogoutHandler.class);
@@ -42,5 +43,5 @@ public class KeycloakLogoutHandler implements LogoutHandler {
             logger.error("Could not propagate logout to Keycloak");
         }
     }
-
 }
+*/
