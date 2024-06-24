@@ -6,15 +6,33 @@ export default ({
   components: {
     Table
     },
-  setup() {
+  setup(){},
+  data(){
+    return{
+      carePlanData: String
+    } 
   },
+  methods: {
+    getData(){
+      const requestOptions = {
+      method: 'GET',
+      headers: { "Authorization":"Bearer Admin" },
+      };
+      fetch('http://localhost:8081/PoC', requestOptions)
+          .then(response => {
+            this.carePlanData = JSON.stringify(response.data, null, "\t");
+            console.log(response.data);
+            return response;
+          });
+    }
+  }
 })
+
 </script>
 
 <template>
   <div class="carePlans">
-    <h1>This is a care plans page</h1>
-    <Table 
+      <Table 
         fetchLink = "http://172.29.16.61/carePlans"
         tableClasses = "text-start table-striped"
         v-bind:tableColumns = "
@@ -63,4 +81,12 @@ export default ({
             ]"
     />
   </div>
+  <div class="hello">
+      <textarea v-model="carePlanData" rows="20" cols="80"></textarea>
+      <ul id="items">
+        <li v-for="(item, index) in listData" :key="index">
+          {{ `${item.text} [${item.id}]` }}
+        </li>
+      </ul>
+    </div>
 </template>

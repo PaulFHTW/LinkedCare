@@ -54,7 +54,6 @@ export default {
       }
     },
     loginUser(){
-      // TODO check loginData with DB
       const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -62,10 +61,6 @@ export default {
       };
       fetch('http://172.29.16.62:8080/login', requestOptions)
           .then(response => response.json())
-
- 
-      //alert(this.loginData.email + " " + this.loginData.password)
-      //window.location="/";
     }
   }
 }

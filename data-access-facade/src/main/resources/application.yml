@@ -30,7 +30,7 @@ spring:
 
 fhir:
   #server-url: "http://pt-n4.fhir.w3.cs.technikum-wien.at/fhir"
-  serverUrl: "https://hapi.fhir.org/baseR4"
+  serverUrl: "http://172.29.16.61:5432/"
 logging:
   level:
     org:

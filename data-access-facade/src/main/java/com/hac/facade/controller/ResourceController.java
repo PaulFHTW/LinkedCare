@@ -1,5 +1,10 @@
 package com.hac.facade.controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -27,30 +32,68 @@ import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+class careplan{
+    public String id;
+    public int txtid;
+    public String ts;
+    public String resource_type;
+    public String status;
+    public String resource;
+};
+
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 @Slf4j
 public class ResourceController {
-
+    
     private final KeycloakService keycloakService;
     private final FHIRDataProvider fhirDataProvider;
     private final FHIRDataStore fhirDataStore;
 
     @GetMapping(value = "/PoC", produces = "application/json")
-    public ResponseEntity<String> GetData(@RequestHeader(name = "Authorization") String token){
+    public ResponseEntity<List<String>> GetData(@RequestHeader(name = "Authorization") String token){
         if (token == null || !token.contains("Bearer")) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
-        
+        //Gson gson = new Gson();
+        List<String> carePlanData = null;
+        try {
+            carePlanData = GetFHIRData();
+        } catch (SQLException ex) {
+            return new ResponseEntity<>(NOT_FOUND);
+        }
+        //var JSONcarePlanData = gson.toJson(carePlanData);
+
         String splitToken = token.split("Bearer")[1].trim();
         if ("Admin".equals(splitToken)) {
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(carePlanData, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
     
+    public static List<String> GetFHIRData() throws SQLException{
+        var carePlanData = new ArrayList<String>();
+        var sql = "select * from careplan";
+        var url = "jdbc:postgresql://172.29.16.61:5432/fhirbase";
+        var username = "postgres";
+        var password = "postgres";
+
+        try(Connection conn = DriverManager.getConnection(url, username, password)){
+            var statement = conn.createStatement();
+            var result = statement.executeQuery(sql);
+            while (result.next()) { 
+                String resource = result.getString("resource");
+                carePlanData.add(resource);
+            }
+        }
+        catch(SQLException e){
+            throw(e);
+        }
+        return carePlanData;
+    }
+
     @PostMapping(value = "/tokenInfo", produces = "application/json")
     public TokenIntrospectionResponse getTokenInfo(@RequestHeader(name = "Authorization") String token) {
         return keycloakService.introspectToken(token);
