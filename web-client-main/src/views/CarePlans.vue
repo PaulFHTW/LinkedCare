@@ -26,7 +26,7 @@ export default ({
           redirect: "follow"
         };
 
-        fetch("http://172.29.16.62:8080/PoC", requestOptions)
+        fetch("http://172.29.16.62:8081/PoC", requestOptions)
           .then(response => response.json())
           .then(data => this.carePlanData = data);
       },
