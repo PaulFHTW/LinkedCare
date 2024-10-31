@@ -1,8 +1,8 @@
 {
   "realm": "data-facade-app",
-  "auth-server-url" : "http://172.29.16.61:8080/",
-  "resource" : "resource-api",
-  "credentials": {
-    "secret": "35b37e9f-186a-4239-a5e5-2f1ce82b7f9a"
-  }
+  "auth-server-url": "http://172.29.16.61:8080/",
+  "ssl-required": "external",
+  "resource": "Test1",
+  "public-client": true,
+  "confidential-port": 0
 }
