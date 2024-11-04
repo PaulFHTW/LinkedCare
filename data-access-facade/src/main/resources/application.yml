@@ -2,26 +2,26 @@ server:
   port: 8081
 
 keycloak:
-  clientID: "Test1"
-  clientSecret: "c31dd103-25ff-42a6-aa3e-7ba5e2d8d7c3"
+  clientID: "JavaBackend"
+  clientSecret: ""
   #ip: "healthaccesscontrol.eastus2.cloudapp.azure.com"
   ip: "172.29.16.61:8080"
   debugMode: false
-  #ip: "http://52.184.137.140:8080/auth/realms/Patients/protocol/openid-connect/token/introspect"
+  #ip: "http://172.29.16.61:8080/auth/realms/data-facade-app/protocol/openid-connect/token/introspect"
 
 spring:
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: "http://172.29.16.61:8080/realms/data-facade-app"
+          issuer-uri: "http://172.29.16.61:8080/realms/data-facade-app/protocol/openid-connect/token"
       client:
         provider:
           keycloak:
-            issuer-uri: "http://172.29.16.61:8080/realms/data-facade-app"
+            issuer-uri: "http://172.29.16.61:8080/realms/data-facade-app/protocol/openid-connect/token"
         registration:
           keycloak:
-            client-id: "Test1"
+            client-id: "JavaBackend"
             authorization-grant-type: "authorization_code"
             scope: "openid"
   jackson:

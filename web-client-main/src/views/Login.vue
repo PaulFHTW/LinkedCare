@@ -59,7 +59,7 @@ export default {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username : this.loginData.email, password : this.loginData.password})
       };
-      fetch('http://172.29.16.62:8080/login', requestOptions)
+      fetch('http://172.29.16.61:8080/realms/data-facade-app/protocol/openid-connect/token', requestOptions)
           .then(response => response.json())
     }
   }
