@@ -54,13 +54,26 @@ export default {
       }
     },
     loginUser(){
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+      const urlencoded = new URLSearchParams();
+      urlencoded.append("grant_type", "password");
+      urlencoded.append("client_id", "JavaBackend");
+      urlencoded.append("username", this.loginData.email);
+      urlencoded.append("password", this.loginData.password);
+
       const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username : this.loginData.email, password : this.loginData.password})
+        method: "POST",
+        headers: myHeaders,
+        body: urlencoded,
+        redirect: "follow"
       };
-      fetch('http://172.29.16.61:8080/realms/data-facade-app/protocol/openid-connect/token', requestOptions)
-          .then(response => response.json())
+
+      fetch("http://172.29.16.61:8080/realms/data-facade-app/protocol/openid-connect/token", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error)); 
     }
   }
 }
