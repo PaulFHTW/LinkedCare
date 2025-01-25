@@ -35,6 +35,7 @@ import com.hac.facade.service.KeycloakService;
 
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController()
@@ -42,6 +43,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 @Slf4j
+@Log4j2
 public class ResourceBundleController {
 
   private final FHIRDataProvider fhirDataProvider;

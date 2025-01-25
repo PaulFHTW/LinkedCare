@@ -14,11 +14,11 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: "http://172.29.16.61:8080/realms/data-facade-app/protocol/openid-connect/token"
+          issuer-uri: "http://172.29.16.61:8080/realms/data-facade-app"
       client:
         provider:
           keycloak:
-            issuer-uri: "http://172.29.16.61:8080/realms/data-facade-app/protocol/openid-connect/token"
+            issuer-uri: "http://172.29.16.61:8080/realms/data-facade-app"
         registration:
           keycloak:
             client-id: "JavaBackend"
