@@ -70,9 +70,16 @@ export default {
         redirect: "follow"
       };
 
+      let cookie;
+      let value;
+
       fetch("http://172.29.16.61:8080/realms/data-facade-app/protocol/openid-connect/token", requestOptions)
-        .then((response) => response.text())
-        .then((result) => console.log(result))
+        .then((response) => response.json())
+        .then(result => {value = result;})
+        //.then(() => console.log(value["access_token"]))
+        .then(() => {cookie = value["access_token"];})
+        //.then(() => console.log(cookie))
+        .then(() => {document.cookie = `${cookie};SameSite=None Secure`;})
         .catch((error) => console.error(error)); 
     }
   }
