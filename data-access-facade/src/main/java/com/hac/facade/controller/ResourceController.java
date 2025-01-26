@@ -60,9 +60,7 @@ public class ResourceController {
 
     @GetMapping(value = "/PoC", produces = "application/json")
     public ResponseEntity<List<String>> GetData(@RequestHeader(name = "Authorization") String token){
-        if (token == null || !token.contains("Bearer")) {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
+        Long keyToken = keycloakService.getUserIDForToken(token);
         
         List<String> carePlanData = null;
         try {
@@ -71,8 +69,7 @@ public class ResourceController {
             return new ResponseEntity<>(NOT_FOUND);
         }
 
-        String splitToken = token.split("Bearer")[1].trim();
-        if ("Admin".equals(splitToken)) {
+        if (keyToken == 1L) {
             return new ResponseEntity<>(carePlanData, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
