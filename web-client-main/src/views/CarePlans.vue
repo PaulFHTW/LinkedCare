@@ -18,7 +18,7 @@ export default ({
     getData: function(){
       let cookie = document.cookie;
       const myHeaders = new Headers();
-        myHeaders.append("Authorization", cookie);//change Bearer Admin to access_token from Postman
+        myHeaders.append("Authorization", `Bearer ${cookie}`);//change Bearer Admin to access_token from Postman
         //myHeaders.append("Cookie", "JSESSIONID=C2A4366647A9DBCA91AF2A1236658F25");
 
         const requestOptions = {
