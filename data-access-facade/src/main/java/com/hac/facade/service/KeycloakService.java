@@ -20,9 +20,9 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class KeycloakService {
 
-    public static final String TOKEN_INTROSPECT = ":8080/auth/realms/data-facade-app/protocol/openid-connect/token/introspect";
-    public static final String TOKEN_EXCHANGE = ":8080/auth/realms/data-facade-app/protocol/openid-connect/token";
-    public static final String SHARE_RESOURCE = ":8080/auth/realms/data-facade-app/authz/protection/permission/ticket";
+    public static final String TOKEN_INTROSPECT = "/realms/data-facade-app/protocol/openid-connect/token/introspect";
+    public static final String TOKEN_EXCHANGE = "/realms/data-facade-app/protocol/openid-connect/token";
+    public static final String SHARE_RESOURCE = "/realms/data-facade-app/authz/protection/permission/ticket";
     private final KeycloakProperties configuration;
 
     public TokenIntrospectionResponse introspectToken(String token) {
@@ -68,13 +68,13 @@ public class KeycloakService {
         return representation.getId();
     }
 
-    public Long getUserIDForToken(String token) {
+    public String getUserIDForToken(String token) {
         if (configuration.isDebugMode()) {
             log.info("DEBUG MODE ON SKIPPING KEYCLOAK!!!");
-            return 1L;
+            return "1L";
         }
         TokenIntrospectionResponse introspectedToken = introspectToken(token);
-        return introspectedToken.getPatientID();
+        return introspectedToken.getPatientID().toString();
     }
 
 
