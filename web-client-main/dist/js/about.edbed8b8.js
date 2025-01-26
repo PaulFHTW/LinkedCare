@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunklinked_care_web_client"]=self["webpackChunklinked_care_web_client"]||[]).push([[594],{3399:function(e,n,t){t.r(n),t.d(n,{default:function(){return l}});var u=t(641);const a={class:"about"};function c(e,n){return(0,u.uX)(),(0,u.CE)("div",a,n[0]||(n[0]=[(0,u.Lk)("h1",null,"This is an about page",-1)]))}var r=t(6262);const i={},s=(0,r.A)(i,[["render",c]]);var l=s}}]);
+//# sourceMappingURL=about.edbed8b8.js.map

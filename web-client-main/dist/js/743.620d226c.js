@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunklinked_care_web_client"]=self["webpackChunklinked_care_web_client"]||[]).push([[743],{1743:function(e,n,t){t.r(n),t.d(n,{default:function(){return l}});var s=t(641);const c={class:"settings"};function i(e,n){return(0,s.uX)(),(0,s.CE)("div",c,n[0]||(n[0]=[(0,s.Lk)("h1",null,"This is the settings page",-1)]))}var r=t(6262);const u={},a=(0,r.A)(u,[["render",i]]);var l=a}}]);
+//# sourceMappingURL=743.620d226c.js.map

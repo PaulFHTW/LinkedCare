@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunklinked_care_web_client"]=self["webpackChunklinked_care_web_client"]||[]).push([[26],{26:function(e,n,r){r.r(n),r.d(n,{default:function(){return s}});var c=r(641);const i={class:"profile"};function l(e,n){return(0,c.uX)(),(0,c.CE)("div",i,n[0]||(n[0]=[(0,c.Lk)("h1",null,"This is a profile page",-1)]))}var t=r(6262);const u={},a=(0,t.A)(u,[["render",l]]);var s=a}}]);
+//# sourceMappingURL=26.bf9029f8.js.map
