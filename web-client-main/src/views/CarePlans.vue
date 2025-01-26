@@ -18,19 +18,24 @@ export default ({
     getData: function(){
       let cookie = document.cookie;
       const myHeaders = new Headers();
-        myHeaders.append("Authorization", `Bearer ${cookie}`);//change Bearer Admin to access_token from Postman
-        //myHeaders.append("Cookie", "JSESSIONID=C2A4366647A9DBCA91AF2A1236658F25");
+      myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+      myHeaders.append("Authorization", `Bearer ${cookie}`);
 
-        const requestOptions = {
-          method: "GET",
-          headers: myHeaders,
-          redirect: "follow"
-        };
+      const urlencoded = new URLSearchParams();
+      //urlencoded.append("test", "test");
 
-        fetch("http://172.29.16.62:8081/PoC", requestOptions)
-          .then(response => response.json())
-          .then(data => this.carePlanData = data);
-      },
+      const requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        //body: urlencoded,
+        redirect: "follow"
+      };
+
+      fetch("http://172.29.16.62:8081/PoC", requestOptions)
+        .then((response) => response.json())
+        .then((result) => {this.carePlanData = result;})
+        .catch((error) => console.error(error));
+    },
     },
     mounted(){
       this.getData()
