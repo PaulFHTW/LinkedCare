@@ -20,8 +20,8 @@ export default ({
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
       myHeaders.append("Authorization", `Bearer ${cookie}`);
-
-      const urlencoded = new URLSearchParams();
+      myHeaders.append("Access-Control-Allow-Origin", "*");
+      //const urlencoded = new URLSearchParams();
       //urlencoded.append("test", "test");
 
       const requestOptions = {
