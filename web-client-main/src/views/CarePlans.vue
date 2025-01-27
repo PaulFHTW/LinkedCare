@@ -18,11 +18,9 @@ export default ({
     getData: function(){
       let cookie = document.cookie;
       const myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+      //myHeaders.append("Content-Type", "application/json");
       myHeaders.append("Authorization", `Bearer ${cookie}`);
-      myHeaders.append("Access-Control-Allow-Origin", "*");
       //const urlencoded = new URLSearchParams();
-      //urlencoded.append("test", "test");
 
       const requestOptions = {
         method: "GET",
@@ -33,8 +31,8 @@ export default ({
 
       fetch("http://172.29.16.61:8081/PoC", requestOptions)
         .then((response) => response.json())
-        .then((result) => {this.carePlanData = result;})
-        .then(console.log(result))
+        .then((result) => console.log(result))
+        //.then((result) => {this.carePlanData = result;})
         .catch((error) => console.error(error));
     },
     },

@@ -60,6 +60,7 @@ export default {
       const urlencoded = new URLSearchParams();
       urlencoded.append("grant_type", "password");
       urlencoded.append("client_id", "JavaBackend");
+      urlencoded.append("client_secret", "BnwoJuydDpZD5z2wVEDU34WJ8vJlpD3A");
       urlencoded.append("username", this.loginData.email);
       urlencoded.append("password", this.loginData.password);
 
