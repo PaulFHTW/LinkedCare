@@ -18,21 +18,18 @@ export default ({
     getData: function(){
       let cookie = document.cookie;
       const myHeaders = new Headers();
-      //myHeaders.append("Content-Type", "application/json");
       myHeaders.append("Authorization", `Bearer ${cookie}`);
-      //const urlencoded = new URLSearchParams();
 
       const requestOptions = {
         method: "GET",
         headers: myHeaders,
-        //body: urlencoded,
         redirect: "follow"
       };
 
       fetch("http://172.29.16.61:8081/PoC", requestOptions)
         .then((response) => response.json())
-        .then((result) => console.log(result))
-        //.then((result) => {this.carePlanData = result;})
+        //.then((result) => console.log(result))
+        .then((result) => {this.carePlanData = result;})
         .catch((error) => console.error(error));
     },
     },
