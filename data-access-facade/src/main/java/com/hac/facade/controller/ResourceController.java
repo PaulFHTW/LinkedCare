@@ -60,6 +60,8 @@ public class ResourceController {
 
     @GetMapping(value = "/PoC", produces = "application/json")
     public ResponseEntity<List<String>> GetData(@RequestHeader(name = "Authorization") String token){
+        Long keyToken = keycloakService.getUserIDForToken(token);
+
         List<String> carePlanData = null;
         try {
             carePlanData = GetFHIRData();
@@ -67,7 +69,7 @@ public class ResourceController {
             return new ResponseEntity<>(NOT_FOUND);
         }
 
-        if (token != null) {
+        if (keyToken == 1L) {
             return new ResponseEntity<>(carePlanData, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -77,7 +79,7 @@ public class ResourceController {
     public static List<String> GetFHIRData() throws SQLException{
         var carePlanData = new ArrayList<String>();
         var sql = "select * from careplan";
-        var url = "jdbc:postgresql://172.29.16.62:5432/fhirbase";
+        var url = "jdbc:postgresql://172.29.16.61:5432/fhirbase";
         var username = "postgres";
         var password = "postgres";
 

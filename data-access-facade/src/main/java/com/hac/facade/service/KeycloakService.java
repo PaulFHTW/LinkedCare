@@ -68,13 +68,13 @@ public class KeycloakService {
         return representation.getId();
     }
 
-    public String getUserIDForToken(String token) {
+    public Long getUserIDForToken(String token) {
         if (configuration.isDebugMode()) {
             log.info("DEBUG MODE ON SKIPPING KEYCLOAK!!!");
-            return "1L";
+            return 1L;
         }
         TokenIntrospectionResponse introspectedToken = introspectToken(token);
-        return introspectedToken.getPatientID().toString();
+        return introspectedToken.getPatientID();
     }
 
 
