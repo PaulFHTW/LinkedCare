@@ -60,7 +60,7 @@ public class ResourceController {
 
     @GetMapping(value = "/PoC", produces = "application/json")
     public ResponseEntity<List<String>> GetData(@RequestHeader(name = "Authorization") String token){
-        Long keyToken = keycloakService.getUserIDForToken(token);
+        TokenIntrospectionResponse keyToken = keycloakService.introspectToken(token);
 
         List<String> carePlanData = null;
         try {
@@ -69,7 +69,7 @@ public class ResourceController {
             return new ResponseEntity<>(NOT_FOUND);
         }
 
-        if (keyToken == 1L) {
+        if (keyToken != null) {
             return new ResponseEntity<>(carePlanData, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

@@ -1,5 +1,6 @@
 module.exports = {
   module: {
+    entry: './src/main.js',
     rules: [
       {
         test: /\.css$/,

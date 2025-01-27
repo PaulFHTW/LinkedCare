@@ -3,7 +3,7 @@ server:
 
 keycloak:
   clientID: "JavaBackend"
-  clientSecret: ""
+  clientSecret: "BnwoJuydDpZD5z2wVEDU34WJ8vJlpD3A"
   #ip: "healthaccesscontrol.eastus2.cloudapp.azure.com"
   ip: "172.29.16.61:8080"
   debugMode: false

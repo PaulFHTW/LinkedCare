@@ -24,7 +24,7 @@ public class KeycloakProperties {
 
     private String ip;
 
-    private boolean debugMode = true;
+    private boolean debugMode = false;
 
     @PostConstruct
     private void printStuff() {
