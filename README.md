@@ -1,5 +1,7 @@
 # linked_care-web_client
 
+#### Winter semester 2024
+
 ## Project setup
 ```
 npm install
